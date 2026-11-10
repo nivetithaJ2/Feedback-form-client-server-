@@ -21,12 +21,15 @@ function App() {
                 setStatus("");
 
                 try {
-                        const response = await fetch("http://localhost:5000/api/feedback", {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify(feedback),
-                        });
+                        const API_URL = import.meta.env.VITE_API_URL;
 
+const response = await fetch(`${API_URL}/api/feedback`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(feedback)
+});
                         if (!response.ok) throw new Error("Request failed");
                         setFeedback(emptyFeedback);
                         setStatus("Feedback submitted successfully.");
